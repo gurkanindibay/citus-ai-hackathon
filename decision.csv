@@ -1,2 +1,2 @@
-#shardid,decision
-102087,split
+#shardid,table_name,tenentid,decision
+,sensors,19,isolate

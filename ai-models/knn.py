@@ -83,6 +83,9 @@ input_data = pd.read_csv('metrics_data_blank_01.csv')
 # Split the data into features (X) and target variable (y)
 X_validate = input_data.drop(['Time', 'ShardSplit Required'], axis=1)
 
+scaler = StandardScaler()
+X_validate = scaler.fit_transform(X_validate)
+
 y_validate = knn.predict(X_validate)
 
 

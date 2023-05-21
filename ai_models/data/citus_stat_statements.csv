@@ -1,0 +1,11 @@
+queryid,userid,dbid,query,executor,partition_key,calls
+-4340964766151108977,10,16384,"INSERT INTO campaigns(company_id, name) VALUES ($1, $2)",adaptive,2,1
+-4340964766151108977,10,16384,"INSERT INTO campaigns(company_id, name) VALUES ($1, $2)",adaptive,3,1
+-1159301358379794361,10,16384,INSERT INTO companies(name) VALUES ($1),adaptive,2,1
+-1159301358379794361,10,16384,INSERT INTO companies(name) VALUES ($1),adaptive,3,1
+-1159301358379794361,10,16384,INSERT INTO companies(name) VALUES ($1),adaptive,1,1
+-643781227824529089,10,16384,"INSERT INTO campaigns(company_id, name) VALUES ($1, $2), ($3, $4)",adaptive,1,1
+760919054841969530,10,16384,UPDATE campaigns SET name = UPPER(name) WHERE company_id = $1,adaptive,3,1
+1936199076906629566,10,16384,"INSERT INTO campaigns(company_id, name) VALUES ($1, $2), ($3, $4), ($5, $6)",adaptive,3,1
+6234343115462660699,10,16384,SELECT name FROM campaigns WHERE company_id = $1 AND name LIKE $2,adaptive,3,1
+8438487803781246919,10,16384,SELECT count(*) FROM campaigns WHERE company_id = $1,adaptive,3,1

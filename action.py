@@ -2,6 +2,7 @@ import csv
 import psycopg2
 import time
 
+decision_file_name = 'ai_models/decision.csv'
 # Connect to your postgres server
 conn = psycopg2.connect(
     dbname="rajesh",
@@ -65,7 +66,7 @@ def get_reader(file):
             yield line
                 
 # Open the CSV file
-with open('decision.csv', 'r') as file:
+with open(decision_file_name, 'r') as file:
     fieldnames = file.readline().strip().lstrip('#').split(',')
     reader = csv.DictReader(file, fieldnames=fieldnames)
     for row in reader:

@@ -1,9 +1,0 @@
-table_name,shardid,shard_name,citus_table_type,colocation_id,nodename,nodeport,shard_size
-campaigns,102012,campaigns_102012,distributed,1,localhost,9701,16384
-campaigns,102013,campaigns_102013,distributed,1,localhost,9702,16384
-campaigns,102014,campaigns_102014,distributed,1,localhost,9701,8192
-campaigns,102015,campaigns_102015,distributed,1,localhost,9702,16384
-companies,102008,companies_102008,distributed,1,localhost,9701,16384
-companies,102009,companies_102009,distributed,1,localhost,9702,16384
-companies,102010,companies_102010,distributed,1,localhost,9701,8192
-companies,102011,companies_102011,distributed,1,localhost,9702,16384

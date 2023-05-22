@@ -1,12 +1,11 @@
 import csv
 import psycopg2
-import time
 
 decision_file_name = 'ai_models/decision.csv'
 # Connect to your postgres server
 conn = psycopg2.connect(
-    dbname="rajesh",
-    user="rajesh",
+    dbname="gurkanindibay",
+    user="gurkanindibay",
     password="",
     host="localhost",
     port="9700"
@@ -49,15 +48,18 @@ def split_shard(shard_id):
     node_id = node_data[0]
 
     # Split the shard at the midpoint
-    query = f"SELECT citus_split_shard_by_split_points({shard_id}, ARRAY['{midpoint}'], ARRAY[{node_id}, {node_id}], 'force_logical');"
+    print(f"Splitting shard: {shard_id} at midpoint: {midpoint} on node: {node_id}")
+    query = f"SELECT citus_split_shard_by_split_points({shard_id}, ARRAY['{midpoint}'], ARRAY[{node_id}, {node_id}], 'block_writes');"
+    print(query)
     cur.execute(query)
-
+    conn.commit()
+    print(f"Split operation of {shard_id} successful. ")
 def isolate_shard(table_name, tenent_id):  
     
     # Split the shard at the midpoint
     query = f"SELECT isolate_tenant_to_new_shard('{table_name}', {tenent_id});"
     cur.execute(query)
-    conn.commit();
+    
     
 
 def get_reader(file):
@@ -75,7 +77,7 @@ with open(decision_file_name, 'r') as file:
             split_shard(shard_id)
        if row['decision'].strip() == 'isolate':
             table_name = row['table_name'].strip()
-            tenent_id = int(row['tenentid'].strip())
+            tenent_id = int(row['tenantid'].strip())
             isolate_shard(table_name,tenent_id)
 cur.close()
 conn.close()

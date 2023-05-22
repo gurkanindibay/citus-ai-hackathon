@@ -1,2 +1,2 @@
-#shardid,table_name,tenentid,decision
-,sensors,19,isolate
+#shardid,table_name,tenantid,decision
+102085,ads,,split

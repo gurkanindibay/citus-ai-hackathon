@@ -15,7 +15,7 @@ def knn_produce_data():
     print("Loading data")
     input_data = pd.read_csv(f'{data_dir}/metrics_data_blank_01.csv')
     # Split the data into features (X) and target variable (y)
-    X_data = input_data.drop(['Time', 'ShardSplit Required'], axis=1)
+    X_data = input_data.drop(["Time", "ShardSplit Required","Node","Tenant_id","Shard"], axis=1)
 
     print("Scaling data")
     scaler = StandardScaler()
@@ -29,16 +29,23 @@ def knn_produce_data():
     y_pred = loaded_model.predict(X_data_scaled)
 
     X_data['ShardSplit Required'] = y_pred
+    X_data['Time'] = input_data['Time']
+    X_data['Node'] = input_data['Node']
+    X_data['Tenant_id'] = input_data['Tenant_id']
+    X_data['Shard'] = input_data['Shard']
 
     # Iterate in X_data and see if there is any 'Yes' in it
     split_required_data = X_data[X_data['ShardSplit Required'] == 'Yes']
+    
+    print("Split required data")
+    print(split_required_data)
 
 
     data_to_export=split_required_data.loc[:,['Shard','Tenant_id','ShardSplit Required']]
     
     data_to_export.rename(columns={'Shard': 'shardid', 'Tenant_id': 'tenant', 'ShardSplit Required': 'decision'}, inplace=True)
     
-    data_to_export['tablename']='stats'
+    data_to_export['tablename']='ads'
     print("Exporting data")
     data_to_export.to_csv(f'{data_dir}/shard_split_required.csv', index=False)
 

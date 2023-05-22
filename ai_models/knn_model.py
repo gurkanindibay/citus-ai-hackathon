@@ -19,7 +19,7 @@ def knn_create_model_file():
     data = pd.concat([data1, data2, data3, data4, data5], axis=0)
 
     # Split the data into features (X) and target variable (y)
-    X = data.drop(["Time", "ShardSplit Required"], axis=1)
+    X = data.drop(["Time", "ShardSplit Required","Node","Tenant_id","Shard"], axis=1)
     y = data["ShardSplit Required"]
 
     # from sklearn.feature_selection import SelectKBest, f_classif
@@ -91,7 +91,7 @@ def knn_create_model_file():
     # Validate the model
     input_data = pd.read_csv(f"{data_dir}/metrics_data_blank_01.csv")
     # Split the data into features (X) and target variable (y)
-    X_validate = input_data.drop(["Time", "ShardSplit Required"], axis=1)
+    X_validate = input_data.drop(["Time", "ShardSplit Required","Node","Tenant_id","Shard"], axis=1)
 
     scaler = StandardScaler()
     X_validate = scaler.fit_transform(X_validate)
